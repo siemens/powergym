@@ -1,0 +1,40 @@
+// Master file for 8500-Node IEEE Test Feeder Case
+// Balanced Load Case
+
+Clear
+
+New Circuit.IEEE8500  
+
+! Make the source stiff with small impedance
+~ pu=1.05  r1=0  x1=0.001  r0=0  x0=0.001  
+
+Redirect  LineCodes2.dss
+Redirect  Triplex_Linecodes.dss
+
+Redirect  Lines.dss
+Redirect  Transformers.dss
+Redirect  LoadXfmrs.dss    ! Load Transformers
+Redirect  Triplex_Lines.dss
+Redirect  Loads.dss     ! Balanced Loads
+Redirect  Capacitors.dss
+Redirect  CapControls.dss
+Redirect  Regulators.dss
+
+!BATTERY DEFINITIONS. Initialize in disconnected mode
+New Generator.batt1 bus1=L3160098.1.2.3 Phases=3 kV=7.2 kW=0 pf=0.95 conn=Delta Model=1
+New Generator.batt2 bus1=L3312692.1 Phases=1 kV=7.2 kW=0 pf=0.95 conn=Wye Model=1
+New Generator.batt3 bus1=L3091052.1 Phases=1 kV=7.2 kW=0 pf=0.95 conn=Wye Model=1
+New Generator.batt4 bus1=L3065696.1 Phases=1 kV=7.2 kW=0 pf=0.95 conn=Wye Model=1
+New Generator.batt5 bus1=L3235247.1 Phases=1 kV=7.2 kW=0 pf=0.95 conn=Wye Model=1
+New Generator.batt6 bus1=L3066804.1 Phases=1 kV=7.2 kW=0 pf=0.95 conn=Wye Model=1
+New Generator.batt7 bus1=L3251854.1 Phases=1 kV=7.2 kW=0 pf=0.95 conn=Wye Model=1
+New Generator.batt8 bus1=L2785537.1 Phases=1 kV=7.2 kW=0 pf=0.95 conn=Wye Model=1
+New Generator.batt9 bus1=L2839331.1 Phases=1 kV=7.2 kW=0 pf=0.95 conn=Wye Model=1
+New Generator.batt10 bus1=M1069509.1.2.3 Phases=3 kV=7.2 kW=0 pf=0.95 conn=Delta Model=1
+
+! Let DSS estimate the voltage bases
+Set voltagebases=[115, 12.47,  0.48, 0.208]
+Calcvoltagebases     ! This also establishes the bus list
+
+! Load in bus coordintes now that bus list is established
+BusCoords  BusCoords.csv

@@ -1,0 +1,5 @@
+/.vscode
+.ipynb_check*
+/systems/*/loadshape
+/systems/*/loadshape.dss
+__pycache__
