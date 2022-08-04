@@ -39,7 +39,7 @@ The implemented circuit systems are summerized as follows.
 
 ## Requirements
 ------------
-- Python 3.8 or higher
+- Python 3.8
 
 For the complete installation
 ```
